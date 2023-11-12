@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列出商品目录</title>
+    <style>
+
+        body{
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        #backgroung{
+            margin: 0;
+            padding: 0;
+            border: 0;
+           vertical-align: baseline;
+            height:600px;
+            background-attachment: fixed;
+            background-size: cover;
+            background-image:url("../static/2.jpg")
+        }
+        #dl{
+            width:400px;
+            height:350px;
+            background-image: linear-gradient(120deg, rgb(107, 182, 204) 0%, rgb(206, 226, 223) 100%);
+            position: absolute;
+            top:100px;
+            right:300px;
+            margin:auto;
+            border-radius: 10%;
+            box-shadow:10px 10px 1px rgba(97, 91, 100, 0.5);
+
+        }
+        .text{
+            color:white;
+            display: flex;
+            justify-content: center;
+            font-style: inherit;
+        }
+        .input{
+            height:10%;
+            width:60%;
+        }
+        .but{
+            display: flex;
+            justify-content: center;
+        }
+        .input-box{
+            width:500px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post">
+        <div id="backgroung" >
+            <div id="dl">
+                <div class="text"><h1>列出商品目录</h1></div>
+          <div class="input-box">
+
+                <table>
+                    {%for value in data_all%}
+                      <tr>
+                           <td>商品名：{{value[0]}}, 价格: {{value[1]}}, 编码：{{value[2]}}</td>
+                      </tr>
+                    {% endfor %}
+                </table>
+
+              </div>
+            </div>
+        </div>
+    </form>>
+</body>
+
+</html>
