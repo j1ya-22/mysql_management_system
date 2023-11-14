@@ -2,83 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>录入商品信息</title>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
-
-        #background{
-            margin: 0;
-            padding: 0;
-            border: 0;
-           vertical-align: baseline;
-            height:600px;
-            background-attachment: fixed;
-            background-size: cover;
-            background-image:url("../static/1.jpg");
-        }
-
-        #dl{
-            width:400px;
-            height:500px;
-            background-color:rgba(45, 204, 202,.7);
-            position: absolute;
-            top:0;
-            bottom:0;
-            left:0;
-            right: 0;
-            margin:auto;
-            border-radius: 10%;
-            box-shadow:10px 10px 1px rgba(97, 91, 100, 0.5);
-        }
-
-        .text{
-            color:white;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center the content vertically */
-            justify-content: center;
-            font-style: inherit;
-        }
-
-        .input{
-            height: 30px; /* Adjust the height as needed */
-            width: 60%;
-            margin: 10px auto; /* Center the input horizontally */
-        }
-
-        .but{
-            display: flex;
-            justify-content: center;
-        }
-        .msg {
-            margin-top: 20px; /* Adjust the margin as needed */
-            text-align: center;
-            color: white;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/login.css">
 </head>
 <body>
-    <form method="post">
-        <div id="background" >
-            <div id="dl">
-                <div class="text">智能家居管理系统登录页面</div>
-                <br>
-                <div class="text">用户名<input class="input"  type="text" name="user"></input></div>
-                <br>
-                <div class="text"> 密码<input class="input"  type="text" name="pwd"></input></div>
-                <br>
-                <div class="but"><a href="success.html"><button type="submit" >提交</button></a></div>
-                <br>
-                <br>
-                <br>
-                <br>
-                 <div class="msg">{{msg}}</div>
+<div class="container right-panel-active">
+    <!-- Sign Up -->
+    <div class="container__form container--signup">
+        <form action="#" class="form" id="form1">
+            <h2 class="form__title">Sign Up</h2>
+            <input type="text" placeholder="User" class="input"/>
+            <input type="email" placeholder="Email" class="input"/>
+            <input type="password" placeholder="Password" class="input"/>
+            <button class="btn">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- Sign In -->
+    <div class="container__form container--signin">
+        <form action="/signin" method="post" class="form" id="form2">
+            <h2 class="form__title">Sign In</h2>
+            <div class="text">用户名<input class="input" type="text" name="user"></input></div>
+            <br>
+            <div class="text">密码<input class="input" type="password" name="pwd"></input></div>
+            <div class="text">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">显示密码</label>
+            </div>
+            <a href="#" class="link">Forgot your password?</a>
+            <div class="button"><a href="success.html">
+                <button type="submit" class="btn" >提交</button>
+            </a></div>
+        </form>
+    </div>
+
+    <!-- Overlay -->
+    <div class="container__overlay">
+        <div class="overlay">
+            <div class="overlay__panel overlay--left">
+                <button class="btn" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay__panel overlay--right">
+                <button class="btn" id="signUp">Sign Up</button>
             </div>
         </div>
-    </form>>
+    </div>
+</div>
+
+<script>
+    const signInBtn = document.getElementById("signIn");
+    const signUpBtn = document.getElementById("signUp");
+    const fistForm = document.getElementById("form1");
+    const secondForm = document.getElementById("form2");
+    const container = document.querySelector(".container");
+
+    signInBtn.addEventListener("click", () => {
+      container.classList.remove("right-panel-active");
+    });
+
+    signUpBtn.addEventListener("click", () => {
+      container.classList.add("right-panel-active");
+    });
+
+</script>
+<br>
+{{msg}}
 </body>
+
 </html>
