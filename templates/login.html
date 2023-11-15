@@ -10,11 +10,15 @@
 <div class="container right-panel-active">
     <!-- Sign Up -->
     <div class="container__form container--signup">
-        <form action="#" class="form" id="form1">
-            <h2 class="form__title">Sign Up</h2>
-            <input type="text" placeholder="User" class="input"/>
-            <input type="email" placeholder="Email" class="input"/>
-            <input type="password" placeholder="Password" class="input"/>
+        <form action="/signup" method="post" class="form" id="form1">
+            <h2 class="form__title">注册</h2>
+            <input type="text" placeholder="用户名" name="user" class="input"/>
+            <input type="password" placeholder="密码" name="pwd" class="input"/>
+             <input type="password" placeholder="再次输入密码" class="input"/>
+            <div class="text">
+                <input type="checkbox" id="showPassword2">
+                <label for="showPassword">显示密码</label>
+            </div>
             <button class="btn">Sign Up</button>
         </form>
     </div>
@@ -22,15 +26,14 @@
     <!-- Sign In -->
     <div class="container__form container--signin">
         <form action="/signin" method="post" class="form" id="form2">
-            <h2 class="form__title">Sign In</h2>
-            <div class="text">用户名<input class="input" type="text" name="user"></input></div>
-            <br>
-            <div class="text">密码<input class="input" type="password" name="pwd"></input></div>
+            <h2 class="form__title">登录</h2>
+             <input type="text" placeholder="用户名" name="user" class="input"/>
+            <input type="password" placeholder="密码" name="pwd" class="input"/>
             <div class="text">
                 <input type="checkbox" id="showPassword">
                 <label for="showPassword">显示密码</label>
             </div>
-            <a href="#" class="link">Forgot your password?</a>
+            <a href="#" class="link">忘记密码？</a>
             <div class="button"><a href="success.html">
                 <button type="submit" class="btn" >提交</button>
             </a></div>

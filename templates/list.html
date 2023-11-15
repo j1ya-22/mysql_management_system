@@ -1,80 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>列出商品目录</title>-->
-<!--    <style>-->
-
-<!--        body{-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            border: 0;-->
-<!--        }-->
-<!--        #backgroung{-->
-<!--            margin: 0;-->
-<!--            padding: 0;-->
-<!--            border: 0;-->
-<!--           vertical-align: baseline;-->
-<!--            height:600px;-->
-<!--            background-attachment: fixed;-->
-<!--            background-size: cover;-->
-<!--            background-image:url("../static/2.jpg")-->
-<!--        }-->
-<!--       #dl {-->
-<!--            width: 900px;-->
-<!--            height: 350px;-->
-<!--            /* width: 80%; /* 调整显示框的宽度 */-->
-<!--            /* max-width: 800px; /* 设置最大宽度 */-->
-<!--            background-image: linear-gradient(120deg, rgb(107, 182, 204) 0%, rgb(206, 226, 223) 100%);-->
-<!--            position: absolute;-->
-<!--         top: 300px;-->
-<!--            right: 300px;-->
-<!--            margin: auto;-->
-<!--         border-radius: 10%;-->
-<!--            box-shadow: 10px 10px 1px rgba(97, 91, 100, 0.5);-->
-<!--            overflow: auto;-->
-<!--       }-->
-<!--        .text{-->
-<!--            color:white;-->
-<!--            display: flex;-->
-<!--            justify-content: center;-->
-<!--            font-style: inherit;-->
-<!--        }-->
-<!--        .input{-->
-<!--            height:10%;-->
-<!--            width:60%;-->
-<!--       }-->
-<!--        .but{-->
-<!--            display: flex;-->
-<!--            justify-content: center;-->
-<!--       }-->
-<!--        .input-box{-->
-<!--            width:700px;-->
-<!--        }-->
-
-<!--    </style>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <form method="post">-->
-<!--        <div id="backgroung" >-->
-<!--            <div id="dl">-->
-<!--                <div class="text"><h1>列出商品目录</h1></div>-->
-<!--          <div class="input-box">-->
-
-<!--                <table>-->
-<!--                    {%for value in data_all%}-->
-<!--                      <tr>-->
-<!--                           <td>家居编号：{{value[0]}}, 家居名称：{{value[1]}}, 所属者：{{value[2]}}, 开/关状态：{{value[3]}}, 购买年月：{{value[4]}}, 购买商店：{{value[5]}}, 商店电话：{{value[6]}}, 商店地址：{{value[7]}}</td>-->
-<!--                      </tr>-->
-<!--                    {% endfor %}-->
-<!--                </table>-->
-
-<!--              </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </form>-->
-<!--</body>-->
-
 <!--</html>-->
 <!DOCTYPE html>
 <html lang="en">
@@ -193,6 +116,7 @@
                 </div>
             </div>
         </div>
+        <a href="{{ url_for('home_page') }}" class="btn btn-primary return-btn">返回</a>
     </form>
 </body>
 </html>

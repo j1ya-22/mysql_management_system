@@ -50,18 +50,19 @@ def login():
         return render_template('login.html', msg='用户名或密码输入错误')
 
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST'])
 def logup():
     r = redgister_db()
     user = request.form.get('user')
     pwd = request.form.get('pwd')
-    data=r.signin(user)
+    if not user or not pwd:
+        return render_template('login.html', msg='用户名或密码不能为空')
+    data = r.signin(user)
     if data:
-        return
+        return render_template('login.html', msg='用户名已存在')
     else:
-        r.signup(user,pwd)
-        return
-
+        r.signup(user, md5_hash(pwd))
+        return redirect('/')
 @app.route('/header', methods=['GET', 'POST'])
 @login_required
 def home_page():
