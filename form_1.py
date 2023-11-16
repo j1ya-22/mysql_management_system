@@ -6,7 +6,6 @@ import secrets
 from hashlib import md5
 from db_control import *
 
-
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.secret_key = secrets.token_hex(16)  # 对用户信息加密,随机生成密钥更加安全
@@ -32,6 +31,8 @@ def login_required(func):  # 实现鉴权
 @app.route('/', methods=['GET'])
 def log_reg():
     return render_template('login.html')
+
+
 @app.route('/signin', methods=['POST'])  # 登录界面
 def login():
     r = redgister_db()
@@ -43,13 +44,14 @@ def login():
         if data:
             if md5_hash(password) == data[0][1] and username == data[0][0]:  # 将密码和数据库中存放的密码进行比对
                 session['user_info'] = username  # 生成session，后期可以进行鉴权
-                return jsonify({'msg': "登录成功"})
+                return jsonify({'msg': "登录成功","redirectUrl":"/header"})
             else:
-                return jsonify({'msg': "密码错误"})
+                return jsonify({'msg': "密码错误","redirectUrl":"/"})
         else:
-            return jsonify({'msg': "用户名不存在"})
+            return jsonify({'msg': "用户名不存在","redirectUrl":"/"})
     else:
-        return jsonify({'msg': "用户名或密码不能为空哈"})
+        return jsonify({'msg': "用户名或密码不能为空哈","redirectUrl":"/"})
+
 
 @app.route('/signup', methods=['GET', 'POST'])
 def logup():
@@ -57,14 +59,15 @@ def logup():
     data = json.loads(request.data)
     user = data['username']
     pwd = data['password1']
-    data=r.signin(user)
-    if data :
-        return jsonify({'msg': "用户名已存在"})
+    data = r.signin(user)
+    if data:
+        return jsonify({'msg': "用户名已存在","redirectUrl":"/"})
     else:
         r = redgister_db()
         pwd = md5_hash(pwd)
         r.signup(user, pwd)
-        return jsonify({'msg': "注册成功，请去登录"})
+        return jsonify({'msg': "注册成功，请去登录","redirectUrl":"/"})
+
 
 @app.route('/header', methods=['GET', 'POST'])
 @login_required

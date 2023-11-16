@@ -212,3 +212,51 @@
         z-index: 5;
       }
     }
+    /* 弹出框基本样式 */
+.popup-box {
+
+  display: none;
+  text-align: center; /* 文本居中 */
+  position: fixed;
+  width: 380px; /* 增大宽度 */
+  padding: 24px; /* 增大内边距 */
+  background-color: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 标题样式 */
+.popup-title {
+  font-size: 22px; /* 增大字体大小 */
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* 内容样式 */
+.popup-content {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* 按钮样式 */
+.popup-close-button {
+  display: block; /* 确保按钮是块级元素 */
+  margin: 10px auto; /* 水平居中 */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-close-button:hover {
+  background-color: #0056b3;
+}

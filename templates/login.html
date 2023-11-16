@@ -13,7 +13,7 @@
         <form class="form" id="form1">
             <h2 class="form__title">注册</h2>
             <input type="text" placeholder="用户名" id="username1" class="input"/>
-            <input type="password" placeholder="密码" id="password1" class="input"/>
+            <input type="password" placeholder="密码:8位以上必须包含大写字母、数字和符号" id="password1" class="input"/>
             <input type="password" placeholder="再次输入密码" id="password2" class="input"/>
             <div class="text">
                 <input type="checkbox" id="showPassword">
@@ -52,6 +52,14 @@
         </div>
     </div>
 </div>
+<!-- 弹出框 -->
+<div class="popup-box" id="loginSuccessPopup">
+    <div class="popup-title">家居管理系统</div>
+    <div class="popup-content" id="popupContent">
+        <!-- 动态内容将在这里显示 -->
+    </div>
+    <button class="popup-close-button" onclick="closePopup()">确定</button>
+</div>
 
 <script>
     const signInBtn = document.getElementById("signIn");
@@ -66,6 +74,27 @@
     signUpBtn.addEventListener("click", () => {
       container.classList.add("right-panel-active");
     });
+    function showPopup(message) {
+            document.getElementById('popupContent').textContent = message;
+            document.getElementById('loginSuccessPopup').style.display = 'block';
+    }
+    function closePopup() {
+            document.getElementById('loginSuccessPopup').style.display = 'none';
+            window.location.href = sessionStorage.getItem('redirectUrl');
+    }
+    function isValidPassword(password) {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/; // 匹配大写字母
+    const hasNumber = /\d/; // 匹配数字
+    const hasSpecialChar = /[\W_]/; // 匹配特殊字符（非字母数字的字符和下划线）
+
+    return (
+        password.length >= minLength &&
+        hasUpperCase.test(password) &&
+        hasNumber.test(password) &&
+        hasSpecialChar.test(password)
+    );
+}
     document.getElementById('form2').addEventListener('submit', function(event) {
             event.preventDefault();
             var username = document.getElementById('username').value;
@@ -84,12 +113,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.msg=="登录成功") {
-                    alert("登录成功");
-                    window.location.href = '/header'; // Change to your actual login page URL
-                } else {
-                    alert(data.msg);
-                }
+                showPopup(data.msg);
+                sessionStorage.setItem('redirectUrl', data.redirectUrl);
             }).catch(error => {
                 console.error('Registration error:', error);
             });
@@ -101,6 +126,10 @@
             var password2 = document.getElementById('password2').value;
             if (password1!=password2){
                 alert("两次密码输入不一致，请重新输入");
+                return;
+            }
+            if (!isValidPassword(password1)){
+                alert("请输入8位以上必须包含大写字母、数字和符号的密码");
                 return;
             }
             var formData = {
@@ -117,12 +146,8 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.msg=="用户名已存在") {
-                    alert(data.msg);
-                    window.location.href = '/'; // Change to your actual login page URL
-                } else {
-                    alert(data.msg);
-                }
+                showPopup(data.msg);
+                sessionStorage.setItem('redirectUrl', data.redirectUrl);
             }).catch(error => {
                 console.error('Registration error:', error);
             });
@@ -147,11 +172,6 @@
         passwordInput2.type = 'password';
     }
 });
-
-
-
-
-
 
 </script>
 <br>
