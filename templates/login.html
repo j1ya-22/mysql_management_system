@@ -10,29 +10,32 @@
 <div class="container right-panel-active">
     <!-- Sign Up -->
     <div class="container__form container--signup">
-        <form action="#" class="form" id="form1">
-            <h2 class="form__title">Sign Up</h2>
-            <input type="text" placeholder="User" class="input"/>
-            <input type="email" placeholder="Email" class="input"/>
-            <input type="password" placeholder="Password" class="input"/>
-            <button class="btn">Sign Up</button>
+        <form class="form" id="form1">
+            <h2 class="form__title">注册</h2>
+            <input type="text" placeholder="用户名" id="username1" class="input"/>
+            <input type="password" placeholder="密码" id="password1" class="input"/>
+            <input type="password" placeholder="再次输入密码" id="password2" class="input"/>
+            <div class="text">
+                <input type="checkbox" id="showPassword">
+                <label for="showPassword">显示密码</label>
+            </div>
+            <button type="submit" class="btn">Sign Up</button>
         </form>
     </div>
 
     <!-- Sign In -->
     <div class="container__form container--signin">
-        <form action="/signin" method="post" class="form" id="form2">
-            <h2 class="form__title">Sign In</h2>
-            <div class="text">用户名<input class="input" type="text" name="user"></input></div>
-            <br>
-            <div class="text">密码<input class="input" type="password" name="pwd"></input></div>
+        <form class="form" id="form2">
+            <h2 class="form__title">登录</h2>
+            <input type="text" placeholder="用户名" id="username" class="input"/>
+            <input type="password" placeholder="密码" id="password" class="input"/>
             <div class="text">
-                <input type="checkbox" id="showPassword">
-                <label for="showPassword">显示密码</label>
+                <input type="checkbox" id="show-password">
+                <label for="show-password">显示密码</label>
             </div>
-            <a href="#" class="link">Forgot your password?</a>
+            <a href="#" class="link">忘记密码？</a>
             <div class="button"><a href="success.html">
-                <button type="submit" class="btn" >提交</button>
+                <button type="submit" class="btn">提交</button>
             </a></div>
         </form>
     </div>
@@ -56,7 +59,6 @@
     const fistForm = document.getElementById("form1");
     const secondForm = document.getElementById("form2");
     const container = document.querySelector(".container");
-
     signInBtn.addEventListener("click", () => {
       container.classList.remove("right-panel-active");
     });
@@ -64,10 +66,96 @@
     signUpBtn.addEventListener("click", () => {
       container.classList.add("right-panel-active");
     });
+    document.getElementById('form2').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var formData = {
+                username: username,
+                password: password
+            };
+            var formDataJSON = JSON.stringify(formData);
+            fetch('/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formDataJSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.msg=="登录成功") {
+                    alert("登录成功");
+                    window.location.href = '/header'; // Change to your actual login page URL
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(error => {
+                console.error('Registration error:', error);
+            });
+        });
+    document.getElementById('form1').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var username = document.getElementById('username1').value;
+            var password1 = document.getElementById('password1').value;
+            var password2 = document.getElementById('password2').value;
+            if (password1!=password2){
+                alert("两次密码输入不一致，请重新输入");
+                return;
+            }
+            var formData = {
+                username: username,
+                password1: password1
+            };
+            var formDataJSON = JSON.stringify(formData);
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formDataJSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.msg=="用户名已存在") {
+                    alert(data.msg);
+                    window.location.href = '/'; // Change to your actual login page URL
+                } else {
+                    alert(data.msg);
+                }
+            }).catch(error => {
+                console.error('Registration error:', error);
+            });
+    });
+
+    document.getElementById('show-password').addEventListener('change', function() {
+    var passwordInput = document.getElementById('password');
+    if (this.checked) {
+        passwordInput.type = 'text';
+    } else {
+        passwordInput.type = 'password';
+    }
+});
+ document.getElementById('showPassword').addEventListener('change', function() {
+    var passwordInput1 = document.getElementById('password1');
+    var passwordInput2 = document.getElementById('password2');
+    if (this.checked) {
+        passwordInput1.type = 'text';
+        passwordInput2.type = 'text';
+    } else {
+        passwordInput1.type = 'password';
+        passwordInput2.type = 'password';
+    }
+});
+
+
+
+
+
 
 </script>
 <br>
-{{msg}}
+
 </body>
 
 </html>
