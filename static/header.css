@@ -1,0 +1,180 @@
+#background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+}
+
+#dl {
+    text-align: center;
+}
+
+.circle-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.circle {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: white;
+    transition: .2s ease-in-out;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.quarter-circle {
+    width: 50%;
+    height: 50%;
+}
+
+.top-left {
+    background-color: #cc39a4;
+    border-radius: 100% 0 0 0;
+    top: 0;
+    left: 0;
+}
+
+.top-right {
+    background-color: #03A9F4;
+    border-radius: 0 100% 0 0;
+    top: 0;
+    right: 0;
+}
+
+.bottom-left {
+    background-color: black;
+    border-radius: 0 0 0 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.bottom-right {
+    background-color: #8c9eff;
+    border-radius: 0 0 100% 0;
+    bottom: 0;
+    right: 0;
+}
+
+.circle:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+}
+/* 前面的样式保持不变 */
+
+.circle-title {
+    display: block;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    color: #fff; /* 标题文本颜色 */
+    font-size: 12px; /* 标题文本大小 */
+    pointer-events: none; /* 防止标题影响点击事件 */
+}
+
+.top-left .circle-title {
+    bottom: 10px; /* 距离底部的距离 */
+    left: 10px; /* 距离左侧的距离 */
+}
+
+.top-right .circle-title {
+    bottom: 10px;
+    right: 10px;
+}
+
+.bottom-left .circle-title {
+    top: 10px;
+    left: 10px;
+}
+
+.bottom-right .circle-title {
+    top: 10px;
+    right: 10px;
+}
+/* 前面的样式保持不变 */
+
+#dl .text {
+    font-size: 24px; /* 字体大小 */
+    color: #333; /* 字体颜色 */
+    font-weight: bold; /* 字体加粗 */
+    margin-bottom: 20px; /* 下边距 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 文本阴影 */
+    text-align: center; /* 居中对齐 */
+}
+
+/* 可以根据需要添加更多样式 */
+/* 前面的样式保持不变 */
+
+
+
+#feature-container {
+    background: rgba(255, 255, 255, 0.8); /* 半透明白色背景 */
+    padding: 20px;
+    border-radius: 10px; /* 圆角边框 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    display: inline-block; /* 使容器适应内容大小 */
+     /* 设置容器的大小 */
+     width: 400px; /* 设置容器的宽度 */
+    height: calc(400px / 1.618); /* 设置容器的高度为宽度除以黄金比例 */
+     /* 添加 flexbox 属性以居中子元素 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    flex-direction: column; /* 子元素垂直排列 */
+}
+
+/* 其他样式保持不变 */
+/*返回按钮*/
+.btn {
+  border: none;
+  /*width: 15em;*/
+  height: 5em;
+  width: auto; /* 自动根据内容调整宽度 */
+    min-width: 100px; /* 设置一个最小宽度，根据需要调整 */
+  border-radius: 3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: #1C1A1C;
+  cursor: pointer;
+  transition: all 450ms ease-in-out;
+}
+.btn-link {
+    position: fixed; /* 或使用 absolute，视您的需要而定 */
+    top: 10px; /* 距离顶部的距离 */
+    left: 10px; /* 距离左侧的距离 */
+    z-index: 1000; /* 确保按钮显示在其他元素之上 */
+}
+.sparkle {
+  fill: #AAAAAA;
+  transition: all 800ms ease;
+}
+
+.text {
+  font-weight: 600;
+  color: #AAAAAA;
+  font-size: 16px;
+   display: inline-block; /* 确保文本是内联块级元素 */
+    margin: 0; /* 移除可能的外边距 */
+}
+
+.btn:hover {
+  background: linear-gradient(0deg,#A47CF3,#683FEA);
+  box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4),
+  inset 0px -4px 0px 0px rgba(0, 0, 0, 0.2),
+  0px 0px 0px 4px rgba(255, 255, 255, 0.2),
+  0px 0px 180px 0px #9917FF;
+  transform: translateY(-2px);
+}
+
+.btn:hover .text {
+  color: white;
+}
+
+.btn:hover .sparkle {
+  fill: white;
+  transform: scale(1.2);
+}
