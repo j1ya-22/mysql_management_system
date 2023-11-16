@@ -10,32 +10,32 @@
 <div class="container right-panel-active">
     <!-- Sign Up -->
     <div class="container__form container--signup">
-        <form action="/signup" method="post" class="form" id="form1">
+        <form class="form" id="form1">
             <h2 class="form__title">注册</h2>
-            <input type="text" placeholder="用户名" name="user" class="input"/>
-            <input type="password" placeholder="密码" name="pwd" class="input"/>
-             <input type="password" placeholder="再次输入密码" class="input"/>
+            <input type="text" placeholder="用户名" id="username1" class="input"/>
+            <input type="password" placeholder="密码:8位以上必须包含大写字母、数字和符号" id="password1" class="input"/>
+            <input type="password" placeholder="再次输入密码" id="password2" class="input"/>
             <div class="text">
-                <input type="checkbox" id="showPassword2">
+                <input type="checkbox" id="showPassword">
                 <label for="showPassword">显示密码</label>
             </div>
-            <button class="btn">Sign Up</button>
+            <button type="submit" class="btn">Sign Up</button>
         </form>
     </div>
 
     <!-- Sign In -->
     <div class="container__form container--signin">
-        <form action="/signin" method="post" class="form" id="form2">
+        <form class="form" id="form2">
             <h2 class="form__title">登录</h2>
-             <input type="text" placeholder="用户名" name="user" class="input"/>
-            <input type="password" placeholder="密码" name="pwd" class="input"/>
+            <input type="text" placeholder="用户名" id="username" class="input"/>
+            <input type="password" placeholder="密码" id="password" class="input"/>
             <div class="text">
-                <input type="checkbox" id="showPassword">
-                <label for="showPassword">显示密码</label>
+                <input type="checkbox" id="show-password">
+                <label for="show-password">显示密码</label>
             </div>
             <a href="#" class="link">忘记密码？</a>
             <div class="button"><a href="success.html">
-                <button type="submit" class="btn" >提交</button>
+                <button type="submit" class="btn">提交</button>
             </a></div>
         </form>
     </div>
@@ -52,6 +52,14 @@
         </div>
     </div>
 </div>
+<!-- 弹出框 -->
+<div class="popup-box" id="loginSuccessPopup">
+    <div class="popup-title">家居管理系统</div>
+    <div class="popup-content" id="popupContent">
+        <!-- 动态内容将在这里显示 -->
+    </div>
+    <button class="popup-close-button" onclick="closePopup()">确定</button>
+</div>
 
 <script>
     const signInBtn = document.getElementById("signIn");
@@ -59,7 +67,6 @@
     const fistForm = document.getElementById("form1");
     const secondForm = document.getElementById("form2");
     const container = document.querySelector(".container");
-
     signInBtn.addEventListener("click", () => {
       container.classList.remove("right-panel-active");
     });
@@ -67,10 +74,108 @@
     signUpBtn.addEventListener("click", () => {
       container.classList.add("right-panel-active");
     });
+    function showPopup(message) {
+            document.getElementById('popupContent').textContent = message;
+            document.getElementById('loginSuccessPopup').style.display = 'block';
+    }
+    function closePopup() {
+            document.getElementById('loginSuccessPopup').style.display = 'none';
+            window.location.href = sessionStorage.getItem('redirectUrl');
+    }
+    function isValidPassword(password) {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/; // 匹配大写字母
+    const hasNumber = /\d/; // 匹配数字
+    const hasSpecialChar = /[\W_]/; // 匹配特殊字符（非字母数字的字符和下划线）
+
+    return (
+        password.length >= minLength &&
+        hasUpperCase.test(password) &&
+        hasNumber.test(password) &&
+        hasSpecialChar.test(password)
+    );
+}
+    document.getElementById('form2').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var formData = {
+                username: username,
+                password: password
+            };
+            var formDataJSON = JSON.stringify(formData);
+            fetch('/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formDataJSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                showPopup(data.msg);
+                sessionStorage.setItem('redirectUrl', data.redirectUrl);
+            }).catch(error => {
+                console.error('Registration error:', error);
+            });
+        });
+    document.getElementById('form1').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var username = document.getElementById('username1').value;
+            var password1 = document.getElementById('password1').value;
+            var password2 = document.getElementById('password2').value;
+            if (password1!=password2){
+                alert("两次密码输入不一致，请重新输入");
+                return;
+            }
+            if (!isValidPassword(password1)){
+                alert("请输入8位以上必须包含大写字母、数字和符号的密码");
+                return;
+            }
+            var formData = {
+                username: username,
+                password1: password1
+            };
+            var formDataJSON = JSON.stringify(formData);
+            fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formDataJSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                showPopup(data.msg);
+                sessionStorage.setItem('redirectUrl', data.redirectUrl);
+            }).catch(error => {
+                console.error('Registration error:', error);
+            });
+    });
+
+    document.getElementById('show-password').addEventListener('change', function() {
+    var passwordInput = document.getElementById('password');
+    if (this.checked) {
+        passwordInput.type = 'text';
+    } else {
+        passwordInput.type = 'password';
+    }
+});
+ document.getElementById('showPassword').addEventListener('change', function() {
+    var passwordInput1 = document.getElementById('password1');
+    var passwordInput2 = document.getElementById('password2');
+    if (this.checked) {
+        passwordInput1.type = 'text';
+        passwordInput2.type = 'text';
+    } else {
+        passwordInput1.type = 'password';
+        passwordInput2.type = 'password';
+    }
+});
 
 </script>
 <br>
-{{msg}}
+
 </body>
 
 </html>

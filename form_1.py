@@ -1,9 +1,10 @@
-from flask import Flask, redirect, request, render_template, session
+import json
+
+from flask import Flask, redirect, request, render_template, session, jsonify
 from functools import wraps
 import secrets
 from hashlib import md5
 from db_control import *
-
 
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
@@ -35,34 +36,39 @@ def log_reg():
 @app.route('/signin', methods=['POST'])  # 登录界面
 def login():
     r = redgister_db()
-    print(1)
-    user = request.form.get('user')
-    pwd = request.form.get('pwd')
-    data = r.signin(user)
-    print(data)
-    if data:
-        if md5_hash(pwd) == data[0][1] and user == data[0][0]:  # 将密码和数据库中存放的密码进行比对
-            session['user_info'] = user  # 生成session，后期可以进行鉴权
-            return redirect('/header')
+    data = json.loads(request.data)
+    username = data['username']
+    password = data['password']
+    data = r.signin(username)
+    if username and password:
+        if data:
+            if md5_hash(password) == data[0][1] and username == data[0][0]:  # 将密码和数据库中存放的密码进行比对
+                session['user_info'] = username  # 生成session，后期可以进行鉴权
+                return jsonify({'msg': "登录成功","redirectUrl":"/header"})
+            else:
+                return jsonify({'msg': "密码错误","redirectUrl":"/"})
         else:
-            return render_template('login.html', msg='用户名或密码输入错误')
+            return jsonify({'msg': "用户名不存在","redirectUrl":"/"})
     else:
-        return render_template('login.html', msg='用户名或密码输入错误')
+        return jsonify({'msg': "用户名或密码不能为空哈","redirectUrl":"/"})
 
 
-@app.route('/signup', methods=['POST'])
+@app.route('/signup', methods=['GET', 'POST'])
 def logup():
     r = redgister_db()
-    user = request.form.get('user')
-    pwd = request.form.get('pwd')
-    if not user or not pwd:
-        return render_template('login.html', msg='用户名或密码不能为空')
+    data = json.loads(request.data)
+    user = data['username']
+    pwd = data['password1']
     data = r.signin(user)
     if data:
-        return render_template('login.html', msg='用户名已存在')
+        return jsonify({'msg': "用户名已存在","redirectUrl":"/"})
     else:
-        r.signup(user, md5_hash(pwd))
-        return redirect('/')
+        r = redgister_db()
+        pwd = md5_hash(pwd)
+        r.signup(user, pwd)
+        return jsonify({'msg': "注册成功，请去登录","redirectUrl":"/"})
+
+
 @app.route('/header', methods=['GET', 'POST'])
 @login_required
 def home_page():
