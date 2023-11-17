@@ -4,43 +4,88 @@
     <meta charset="UTF-8">
     <title>库存管理系统</title>
     <link rel="stylesheet" href="../static/login.css">
-    <link rel="stylesheet" href="../static/header.css">
+<!--    <style>-->
+
+<!--        body{-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            border: 0;-->
+<!--        }-->
+<!--        #background{-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--            border: 0;-->
+<!--           vertical-align: baseline;-->
+<!--            height:600px;-->
+<!--            background-attachment: fixed;-->
+<!--            background-size: cover;-->
+<!--            background-image:url("background_list.jpg");-->
+<!--        }-->
+<!--        #dl{-->
+<!--            width:200px;-->
+<!--            height:230px;-->
+<!--           background-image: linear-gradient(120deg, #50fdff 0%, #fce5ff 100%);-->
+<!--            position: absolute;-->
+<!--            top:0;-->
+<!--            bottom:0;-->
+<!--            left:0;-->
+<!--            right: 0;-->
+<!--            margin:auto;-->
+<!--            border-radius: 10%;-->
+<!--            box-shadow:10px 10px 1px rgba(97, 91, 100, 0.5);-->
+<!--        }-->
+<!--        .text{-->
+<!--            color:white;-->
+<!--            display: flex;-->
+<!--            justify-content: center;-->
+
+<!--        }-->
+<!--        .input{-->
+<!--            height:10%;-->
+<!--            width:60%;-->
+<!--        }-->
+<!--      .but{-->
+<!--                  display: flex;-->
+<!--                 justify-content: center;-->
+<!--      }-->
+<!--      button{-->
+<!--         width:150px;-->
+<!--         background-image: linear-gradient(120deg, #50fdff 0%, #fce5ff 100%);-->
+<!--         border-radius:10%;-->
+<!--      }-->
+<!--       button:hover{-->
+<!--          font-size:15px;-->
+<!--          background-image: linear-gradient(120deg,rgb(209, 221, 243) 0%, #96e8e6 100%);-->
+<!--       }-->
+<!--       button:active{-->
+<!--         background-image: linear-gradient(120deg,#bcffff 0%,  #caf7ec 100%);-->
+
+<!--       }-->
+<!--    </style>-->
 </head>
 <body>
-<div id="background">
-    <!-- 返回按钮 -->
-    <a href="/" class="btn-link">
-    <button class="btn">
-        <!-- SVG 图标 -->
-        <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
-        <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
-    </svg>
-        <!-- 按钮文本 -->
-        <span class="text">返回</span>
-    </button>
-</a>
 
-    <!-- 新增的包裹容器 -->
-    <div id="feature-container">
-        <div id="dl">
-            <div class="text">系统功能选择</div>
-            <div class="circle-container">
-                <a href="link1.html" class="circle quarter-circle top-left">
-                    <span class="circle-title">标题1</span>
-                </a>
-                <a href="link2.html" class="circle quarter-circle top-right">
-                    <span class="circle-title">标题2</span>
-                </a>
-                <a href="link3.html" class="circle quarter-circle bottom-left">
-                    <span class="circle-title">标题3</span>
-                </a>
-                <a href="link4.html" class="circle quarter-circle bottom-right">
-                    <span class="circle-title">标题4</span>
-                </a>
+        <div id="background" >
+            <div id="dl">
+                <div class="text">系统功能选择</div>
+                <br>
+            <div class="but">
+                    <a href="create" target="_blank"><button>商品入库</button></a>
+                </div>
+                <br>
+                <div class="but">
+             <a href="query_1" target="_blank"><button>商品查询</button></a>
+                </div>
+            <br>
+            <div class="but">
+                <a href="delete" target="_blank"><button>商品出库</button></a>
+            </div>
+            <br>
+            <div class="but">
+            <a href="list" target="_blank"><button>列出商品目录</button></a>
+            </div>
+                <br>
             </div>
         </div>
-    </div>
-</div>
 
 </body>
-</html>
