@@ -56,19 +56,23 @@ def login():
 @app.route('/signup', methods=['GET', 'POST'])
 def logup():
     r = redgister_db()
+    t = redgister_db()
     data = json.loads(request.data)
     user = data['username']
     pwd = data['password1']
+    token = data['token']
+    verify = t.signin('admin')
     data = r.signin(user)
-    if data:
-        return jsonify({'msg': "用户名已存在","redirectUrl":"/"})
+    if verify[0][1]==md5_hash(token):
+        if data:
+            return jsonify({'msg': "用户名已存在","redirectUrl":"/"})
+        else:
+            r = redgister_db()
+            pwd = md5_hash(pwd)
+            r.signup(user, pwd)
+            return jsonify({'msg': "注册成功，请去登录","redirectUrl":"/"})
     else:
-        r = redgister_db()
-        pwd = md5_hash(pwd)
-        r.signup(user, pwd)
-        return jsonify({'msg': "注册成功，请去登录","redirectUrl":"/"})
-
-
+        return jsonify({'msg': "token错误", "redirectUrl": "/"})
 @app.route('/header', methods=['GET', 'POST'])
 @login_required
 def home_page():

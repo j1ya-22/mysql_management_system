@@ -15,6 +15,7 @@
             <input type="text" placeholder="用户名" id="username1" class="input"/>
             <input type="password" placeholder="密码:8位以上必须包含大写字母、数字和符号" id="password1" class="input"/>
             <input type="password" placeholder="再次输入密码" id="password2" class="input"/>
+            <input type="password" placeholder="管理员token" id="token" class="input"/>
             <div class="text">
                 <input type="checkbox" id="showPassword">
                 <label for="showPassword">显示密码</label>
@@ -34,7 +35,7 @@
                 <label for="show-password">显示密码</label>
             </div>
             <a href="#" class="link">忘记密码？</a>
-            <div class="button"><a href="success.html">
+            <div class="button">
                 <button type="submit" class="btn">提交</button>
             </a></div>
         </form>
@@ -124,6 +125,7 @@
             var username = document.getElementById('username1').value;
             var password1 = document.getElementById('password1').value;
             var password2 = document.getElementById('password2').value;
+            var token = document.getElementById('token').value
             if (password1!=password2){
                 alert("两次密码输入不一致，请重新输入");
                 return;
@@ -134,7 +136,8 @@
             }
             var formData = {
                 username: username,
-                password1: password1
+                password1: password1,
+                token: token
             };
             var formDataJSON = JSON.stringify(formData);
             fetch('/signup', {
