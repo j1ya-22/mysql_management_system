@@ -16,3 +16,31 @@ class redgister_db(object):
         with self.cursor as cursor:
             cursor.execute(sql, (username, password,))
             self.connect.commit()
+
+    def select_Television(self):
+        sql = "select * from 查询电视类"
+        with self.cursor as cursor:
+            cursor.execute(sql)
+            data_origin = cursor.fetchall()
+        return  data_origin
+
+    def select_Air(self):
+        sql = "select * from 查询空调类"
+        with self.cursor as cursor:
+            cursor.execute(sql)
+            data_origin = cursor.fetchall()
+        return  data_origin
+
+    def select_Curtain(self):
+        sql = "select * from 查询窗帘类"
+        with self.cursor as cursor:
+            cursor.execute(sql)
+            data_origin = cursor.fetchall()
+        return  data_origin
+
+    def select_Light(self):
+        sql = "select * from 查询电灯类"
+        with self.cursor as cursor:
+            cursor.execute(sql)
+            data_origin = cursor.fetchall()
+        return  data_origin

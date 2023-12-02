@@ -9,7 +9,7 @@ from db_control import *
 app = Flask(__name__)
 app.config['JSON_AS_ASCII'] = False
 app.secret_key = secrets.token_hex(16)  # 对用户信息加密,随机生成密钥更加安全
-
+print(app.secret_key)
 
 def md5_hash(text):
     text = text.encode('utf-8')
@@ -79,6 +79,30 @@ def home_page():
     if request.method == 'GET':
         return render_template('header.html')
 
+@app.route('/select_T', methods=['GET', 'POST'])
+@login_required
+def select_T():
+    r = redgister_db()
+    data_all=r.select_Television()
+    return render_template('list_Television.html',data_all=data_all,data_num=len(data_all))
+@app.route('/select_A', methods=['GET', 'POST'])
+@login_required
+def select_A():
+    r = redgister_db()
+    data_all=r.select_Air()
+    return render_template('list_Aircondition.html',data_all=data_all,data_num=len(data_all))
+@app.route('/select_C', methods=['GET', 'POST'])
+@login_required
+def select_C():
+    r = redgister_db()
+    data_all=r.select_Curtain()
+    return render_template('list_Curtain.html',data_all=data_all,data_num=len(data_all))
+@app.route('/select_L', methods=['GET', 'POST'])
+@login_required
+def select_L():
+    r = redgister_db()
+    data_all=r.select_Light()
+    return render_template('list_Light.html',data_all=data_all,data_num=len(data_all))
 
 if __name__ == '__main__':
     app.run()
