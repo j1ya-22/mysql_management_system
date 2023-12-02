@@ -1,0 +1,70 @@
+ body {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+
+        #backgroung {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            vertical-align: baseline;
+            height: 600px;
+            background-attachment: fixed;
+            background-size: cover;
+            background-image: url("../static/2.jpg");
+        }
+
+        #dl {
+            width: 900px;
+            height: 600px;
+            background-image: linear-gradient(120deg, rgb(107, 182, 204) 0%, rgb(206, 226, 223) 100%);
+            position: absolute;
+            top: 60px;
+            right: 300px;
+            margin: auto;
+            border-radius: 10%;
+            box-shadow: 10px 10px 1px rgba(97, 91, 100, 0.5);
+            overflow: auto;
+        }
+
+        .text {
+            color: white;
+            display: flex;
+            justify-content: center;
+            font-style: inherit;
+        }
+
+        .input {
+            height: 10%;
+            width: 60%;
+        }
+
+        .but {
+            display: flex;
+            justify-content: center;
+        }
+
+        .input-box {
+            width: 900px;
+            white-space: nowrap; /* 防止换行 */
+            text-align: center; /* 让表格内容在水平方向上居中 */
+        }
+
+        table {
+            width: 100%;
+            white-space: nowrap; /* 防止换行 */
+            border-collapse: collapse;
+            margin-top: 20px; /* 调整表格与上方内容的距离 */
+        }
+
+        th, td {
+            border: 1px solid white;
+            padding: 10px;
+            color: white;
+            text-align: center; /* 居中对齐 */
+        }
+
+        th {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
