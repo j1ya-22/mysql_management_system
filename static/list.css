@@ -42,9 +42,42 @@
 
         .but {
             display: flex;
-            justify-content: center;
+            top: 10px;
+            right: 10px;
         }
 
+        .but-add {
+             position: fixed;
+             bottom: 100%; /* 距离底部的距离，根据需要调整值 */
+             right: 10%;   /* 距离左侧的距离，根据需要调整值 */
+             transform: scale(1.5);  /* 将按钮水平居中并放大1.5倍 */
+        }
+        .but-add .text {
+            font-size: 18px; /* 根据需要调整字体大小 */
+             color: white;
+        }
+
+        .but-delete {
+             position: fixed;
+             bottom: 80%; /* 距离底部的距离，根据需要调整值 */
+             right: 10%;    /* 使左侧距离页面左侧的一半 */
+             transform: translateX(-50%) scale(1.5);  /* 将按钮水平居中并放大1.5倍 */
+        }
+        .but-delete .text {
+            font-size: 18px; /* 根据需要调整字体大小 */
+            color: white;
+        }
+
+        .but-modify {
+             position: fixed;
+             bottom: 60%; /* 距离底部的距离，根据需要调整值 */
+             right: 10%;   /* 距离左侧的距离，根据需要调整值 */
+             transform: scale(1.5);
+        }
+        .but-modify .text {
+            font-size: 18px; /* 根据需要调整字体大小 */
+            color: white;
+        }
         .input-box {
             width: 900px;
             white-space: nowrap; /* 防止换行 */

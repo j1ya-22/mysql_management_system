@@ -103,6 +103,30 @@ def select_L():
     r = redgister_db()
     data_all=r.select_Light()
     return render_template('list_Light.html',data_all=data_all,data_num=len(data_all))
+@app.route('/add_T', methods=['GET', 'POST'])
+@login_required
+def add_T():
+    return render_template('create_television.html')
 
+@app.route('/create_T', methods=['GET', 'POST'])
+@login_required
+def create_T():
+    data = json.loads(request.data)
+    print(data)
+    r = redgister_db()
+    t = redgister_db()
+    g = redgister_db()
+    max_pid=r.select_maxT()
+    Pid = max_pid[:1] + str(int(max_pid[1:]) + 1).zfill(len(max_pid) - 1)
+    Tname = data['p_name']
+    Rid = int(t.select_Rid(data['p_room']))
+    Pon = data['p_on']
+    Pstime = data['p_stime']
+    Petime = data['p_etime']
+    Pvolume = data['p_volume']
+    Plight = data['p_light']
+    print(Pid,Tname,Rid,Pon,Plight,Pstime,Petime,Pvolume)
+    g.add_T(Pid,Tname,Rid,Pon,Pstime,Petime,Pvolume,Plight)
+    return jsonify({'msg': "添加成功", "redirectUrl": "/select_T"})
 if __name__ == '__main__':
     app.run()
