@@ -125,8 +125,13 @@ def create_T():
     Petime = data['p_etime']
     Pvolume = data['p_volume']
     Plight = data['p_light']
-    print(Pid,Tname,Rid,Pon,Plight,Pstime,Petime,Pvolume)
     g.add_T(Pid,Tname,Rid,Pon,Pstime,Petime,Pvolume,Plight)
     return jsonify({'msg': "添加成功", "redirectUrl": "/select_T"})
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run()

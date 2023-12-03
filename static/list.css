@@ -49,19 +49,19 @@
         .but-add {
              position: fixed;
              bottom: 100%; /* 距离底部的距离，根据需要调整值 */
-             right: 10%;   /* 距离左侧的距离，根据需要调整值 */
-             transform: scale(1.5);  /* 将按钮水平居中并放大1.5倍 */
+             right: 6.5%;   /* 距离左侧的距离，根据需要调整值 */
+             transform: scale(1);  /* 将按钮水平居中并放大1.5倍 */
         }
         .but-add .text {
             font-size: 18px; /* 根据需要调整字体大小 */
-             color: white;
+            color: white;
         }
 
         .but-delete {
              position: fixed;
-             bottom: 80%; /* 距离底部的距离，根据需要调整值 */
-             right: 10%;    /* 使左侧距离页面左侧的一半 */
-             transform: translateX(-50%) scale(1.5);  /* 将按钮水平居中并放大1.5倍 */
+             bottom: 90%; /* 距离底部的距离，根据需要调整值 */
+             right: 6.5%;    /* 使左侧距离页面左侧的一半 */
+             transform: scale(1);  /* 将按钮水平居中并放大1.5倍 */
         }
         .but-delete .text {
             font-size: 18px; /* 根据需要调整字体大小 */
@@ -70,9 +70,9 @@
 
         .but-modify {
              position: fixed;
-             bottom: 60%; /* 距离底部的距离，根据需要调整值 */
-             right: 10%;   /* 距离左侧的距离，根据需要调整值 */
-             transform: scale(1.5);
+             bottom: 80%; /* 距离底部的距离，根据需要调整值 */
+             right: 6.5%;   /* 距离左侧的距离，根据需要调整值 */
+             transform: scale(1);
         }
         .but-modify .text {
             font-size: 18px; /* 根据需要调整字体大小 */

@@ -81,7 +81,17 @@ class redgister_db(object):
         sql2="INSERT INTO Television VALUES (%s, %s, %s, %s, %s, %s);"
         pstyle="电视机"
         with self.cursor as cursor:
-            print(type(Pid), type(Tname), type(Rid), type(Pon), type(Plight), type(Pstime), type(Petime), type(Pvolume))
+
             cursor.execute(sql1,(Pid,Tname,pstyle,Rid,))
             cursor.execute(sql2,(Pid,Pon,Pstime,Petime,Pvolume,Plight,))
+            self.connect.commit()
+
+
+    def add_C(self,Pid,Cname,Rid,Pon,Pstime,Petime,Plight):
+        sql1 = "INSERT INTO Product VALUES (%s,%s,%s,%s);"
+        sql2 = "INSERT INTO Curtain VALUES (%s, %s, %s, %s, %s);"
+        pstyle = "窗帘"
+        with self.cursor as cursor:
+            cursor.execute(sql1, (Pid, Cname, pstyle, Rid,))
+            cursor.execute(sql2, (Pid, Pon, Pstime, Petime, Plight,))
             self.connect.commit()
