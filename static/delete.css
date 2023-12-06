@@ -1,0 +1,129 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#background{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    height:600px;
+    background-attachment: fixed;
+    background-size: cover;
+    /*background-image:url("../static/1.jpg");*/
+}
+#dl {
+    top:50px;
+    width: 400px;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    border-radius: 10%;
+    box-shadow: 10px 10px 1px rgba(97, 91, 100, 0.5);
+    padding: 20px;
+    text-align: center;
+}
+
+
+
+.input {
+    height: 30px;
+    width: 60%;
+    margin: 10px 0;
+    padding: 5px;
+}
+
+ .text{
+            color:white;
+            display: flex;
+            justify-content: center;
+            font-style: inherit;
+        }
+
+        .input{
+            height:10%;
+            width:65%;
+            display: inline-block; /* 添加行内块元素样式 */
+        }
+
+        .input-container {
+            display: flex; /* 添加弹性布局 */
+            align-items: center; /* 垂直居中对齐 */
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .but{
+            display: flex;
+            justify-content: center;
+        }
+        .but1{
+             position: fixed;
+             top: 10px;
+             left: 10px;
+             z-index: 1000; /* 保证按钮在其他元素之上 */
+        }
+.popup-box {
+
+  display: none;
+  text-align: center; /* 文本居中 */
+  position: fixed;
+  width: 380px; /* 增大宽度 */
+  padding: 24px; /* 增大内边距 */
+  background-color: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 标题样式 */
+.popup-title {
+  font-size: 22px; /* 增大字体大小 */
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* 内容样式 */
+.popup-content {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* 按钮样式 */
+.popup-close-button {
+  display: block; /* 确保按钮是块级元素 */
+  margin: 10px auto; /* 水平居中 */
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-close-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+

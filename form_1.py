@@ -112,7 +112,6 @@ def add_T():
 @login_required
 def create_T():
     data = json.loads(request.data)
-    print(data)
     r = redgister_db()
     t = redgister_db()
     g = redgister_db()
@@ -125,8 +124,43 @@ def create_T():
     Petime = data['p_etime']
     Pvolume = data['p_volume']
     Plight = data['p_light']
-    g.add_T(Pid,Tname,Rid,Pon,Pstime,Petime,Pvolume,Plight)
-    return jsonify({'msg': "添加成功", "redirectUrl": "/select_T"})
+    massage=g.add_T(Pid,Tname,Rid,Pon,Pstime,Petime,Pvolume,Plight)
+    if massage=="添加成功":
+        return jsonify({'msg': massage, "redirectUrl": "/select_T"})
+    else:
+        return jsonify({'msg': massage, "redirectUrl": "/add_T"})
+
+@app.route('/add_C', methods=['GET', 'POST'])
+@login_required
+def add_C():
+    return render_template('create_curtain.html')
+
+
+
+
+
+
+
+
+@app.route('/del_T', methods=['GET', 'POST'])
+@login_required
+def del_T():
+    return render_template('delete_television.html')
+
+@app.route('/delete_T', methods=['GET', 'POST'])
+@login_required
+def delete_T():
+    data = json.loads(request.data)
+    Tname=data['p_name']
+    Rname = data['p_room']
+    r = redgister_db()
+    t = redgister_db()
+    Rid = t.select_Rid(Rname)
+    massage = r.del_T(Tname,Rid)
+    if massage=="删除成功":
+        return jsonify({'msg': massage, "redirectUrl": "/select_T"})
+    else:
+        return jsonify({'msg': massage, "redirectUrl": "/del_T"})
 
 
 

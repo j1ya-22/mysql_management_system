@@ -77,7 +77,7 @@
             // 阻止表单默认提交行为
             event.preventDefault();
             // 获取输入框的值
-            const p_name = document.getElementById("p_name").value.trim();
+            var p_name = document.getElementById("p_name").value.trim();
             const p_room = document.getElementById("p_room").value.trim();
             var p_on = document.getElementById("p_on").value.trim();
             var p_stime = document.getElementById("p_stime").value.trim();
@@ -87,6 +87,7 @@
             if (p_name === "" || p_name.length > 10) {
                 sessionStorage.setItem('redirectUrl', "/add_T");
                 showPopup("电视名称不正确");
+                return;
 
             }
             if (p_room !== "主卧" && p_room !== "副卧" && p_room !== "客卧" && p_room !== "客厅" && p_room !== "书房"){
@@ -95,6 +96,7 @@
                 return;
             }
             if (p_on === ""){
+
                 p_on="off";
             }
             else if (p_on !== "on" && p_on !== "off") {

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/delete.css">
+    <title>删除电视数据</title>
+</head>
+<body>
+    <form method="post" id="form">
+        <div id="background" >
+            <div id="dl">
+                <div class="text">电视删除</div>
+                <br>
+                <div class="input-container">
+                    <div class="text">电视名称：</div>
+                    <input class="input" placeholder="长度不超过10" type="text" id="p_name"></input>
+                </div>
+                <br>
+                <div class="input-container">
+                    <div class="text">房间名称：</div>
+                    <input class="input" placeholder="主卧、副卧、客卧、客厅、书房" type="text" id="p_room"></input>
+                </div>
+                <br>
+              <div class="but"><button type="submit" >提交</button></div>
+            </div>
+        </div>
+    </form>
+    <div class="popup-box" id="loginSuccessPopup">
+        <div class="popup-title">家居管理系统</div>
+        <div class="popup-content" id="popupContent">
+            <!-- 动态内容将在这里显示 -->
+        </div>
+        <button class="popup-close-button" onclick="closePopup()">确定</button>
+    </div>
+    <script>
+         function showPopup(message) {
+            document.getElementById('popupContent').textContent = message;
+            document.getElementById('loginSuccessPopup').style.display = 'block';
+        }
+        function closePopup() {
+            document.getElementById('loginSuccessPopup').style.display = 'none';
+            if(sessionStorage.getItem('redirectUrl')!==null){
+
+                window.location.href = sessionStorage.getItem('redirectUrl');
+            }
+        }
+        // 获取表单元素和按钮元素
+        const form = document.getElementById("form");
+        const btn = document.querySelector("button[type=submit]");
+
+        // 添加点击事件监听器
+        btn.addEventListener("click", function(event) {
+            // 阻止表单默认提交行为
+            event.preventDefault();
+
+            // 获取输入框的值
+            const p_name = document.getElementById("p_name").value.trim();
+            const p_room = document.getElementById("p_room").value.trim();
+
+            if (p_name === "" || p_name.length > 10) {
+                sessionStorage.setItem('redirectUrl', "/del_T");
+                showPopup("电视名称不正确");
+                return;
+            }
+
+            if (p_room !== "主卧" && p_room !== "副卧" && p_room !== "客卧" && p_room !== "客厅" && p_room !== "书房"){
+                sessionStorage.setItem('redirectUrl', "/del_T");
+                showPopup("房间名称不正确");
+                return
+            }
+
+            // 提交表单
+            //form.action = "success.html";
+            //form.submit();
+            var formData = {
+                p_name: p_name,
+                p_room: p_room,
+            };
+            var formDataJSON = JSON.stringify(formData);
+            console.log(formDataJSON);
+            fetch('/delete_T', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formDataJSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                showPopup(data.msg);
+                sessionStorage.setItem('redirectUrl', data.redirectUrl);
+            }).catch(error => {
+                console.error('Registration error:', error);
+            });
+        });
+    </script>
+<div class="but1">
+    <a href="/select_T" class="btn-link">
+        <button class="btn">
+            <!-- 按钮文本 -->
+            <span class="text">返回</span>
+        </button>
+    </a>
+</div>
+</body>
+</html>
