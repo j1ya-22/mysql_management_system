@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/delete.css">
-    <title>删除电视数据</title>
+    <title>删除空调数据</title>
 </head>
 <body>
 <form method="post" id="form">
     <div id="background">
         <div id="dl">
-            <div class="text">电视删除</div>
+            <div class="text">空调删除</div>
             <br>
             <div class="input-container">
-                <div class="text">电视名称：</div>
+                <div class="text">空调名称：</div>
                 <input class="input" placeholder="长度不超过10" type="text" id="p_name"></input>
             </div>
             <br>
@@ -67,10 +67,15 @@
 
             if (p_name === "" || p_name.length > 10) {
                 sessionStorage.setItem('redirectUrl', "/del_T");
-                showPopup("电视名称不正确");
+                showPopup("空调名称不正确");
                 return;
             }
 
+            if (p_room !== "主卧" && p_room !== "副卧" && p_room !== "客卧" && p_room !== "客厅" && p_room !== "书房"){
+                sessionStorage.setItem('redirectUrl', "/del_T");
+                showPopup("房间名称不正确");
+                return
+            }
 
             // 提交表单
             //form.action = "success.html";
@@ -81,7 +86,7 @@
             };
             var formDataJSON = JSON.stringify(formData);
             console.log(formDataJSON);
-            fetch('/delete_T', {
+            fetch('/delete_A', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -99,7 +104,7 @@
 
 </script>
 <div class="but1">
-    <a href="/select_T" class="btn-link">
+    <a href="/select_A" class="btn-link">
         <button class="btn">
             <!-- 按钮文本 -->
             <span class="text">返回</span>
