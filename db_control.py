@@ -146,7 +146,7 @@ class redgister_db(object):
         with self.cursor as cursor:
             cursor.execute(sql1, (Tname,Rid))
             data_origin = cursor.fetchall()
-            if data_origin:
+            if data_origin and data_origin[0][0][0]=='T':
                 Pid=data_origin[0][0]
                 sql2 = "DELETE  FROM Product WHERE Pid=%s;"
                 sql3 = "DELETE  FROM Television WHERE Pid=%s;"
@@ -163,7 +163,7 @@ class redgister_db(object):
         with self.cursor as cursor:
             cursor.execute(sql1, (Cname,Rid))
             data_origin = cursor.fetchall()
-            if data_origin:
+            if data_origin and data_origin[0][0][0]=='C':
                 Pid=data_origin[0][0]
                 sql2 = "DELETE  FROM Product WHERE Pid=%s;"
                 sql3 = "DELETE  FROM Curtain WHERE Pid=%s;"
@@ -180,7 +180,7 @@ class redgister_db(object):
         with self.cursor as cursor:
             cursor.execute(sql1, (Aname,Rid))
             data_origin = cursor.fetchall()
-            if data_origin:
+            if data_origin and data_origin[0][0][0]=='A':
                 Pid=data_origin[0][0]
                 print(Pid)
                 sql2 = "DELETE  FROM Product WHERE Pid=%s;"
@@ -197,7 +197,7 @@ class redgister_db(object):
         with self.cursor as cursor:
             cursor.execute(sql1, (Lname, Rid))
             data_origin = cursor.fetchall()
-            if data_origin:
+            if data_origin and data_origin[0][0][0]=='L':
                 Pid = data_origin[0][0]
 
                 sql2 = "DELETE  FROM Product WHERE Pid=%s;"
@@ -208,3 +208,61 @@ class redgister_db(object):
                 return "删除成功"
             else:
                 return "没有这个电灯哦"
+
+    def mod_T(self, Pname,Rid,Pon,Pstime,Petime,Pvolume,Plight):
+        sql1 = "UPDATE Television SET Pon=%s, Pstime=%s, Petime=%s, Pvolume=%s, Plight=%s WHERE Pid=%s;"
+        sql2 = "SELECT Pid FROM Product WHERE Pname=%s AND Rid=%s"
+        with self.cursor as cursor:
+            cursor.execute(sql2, (Pname, Rid))
+            data_origin = cursor.fetchall()
+            if data_origin and data_origin[0][0][0]=='T':
+                Pid = data_origin[0][0]
+                cursor.execute(sql1, (Pon, Pstime, Petime, Pvolume, Plight, Pid))
+                self.connect.commit()
+                return "自定义成功"
+            else:
+                return "没有这个电视哦"
+
+    def mod_C(self, Pname, Rid, Pon, Pstime, Petime, Plight):
+        sql1 = "UPDATE Curtain SET Pon=%s, Pstime=%s, Petime=%s, Plight=%s WHERE Pid=%s;"
+        sql2 = "SELECT Pid FROM Product WHERE Pname=%s AND Rid=%s"
+        with self.cursor as cursor:
+            cursor.execute(sql2, (Pname, Rid))
+            data_origin = cursor.fetchall()
+            if data_origin and data_origin[0][0][0]=='C':
+                Pid = data_origin[0][0]
+                cursor.execute(sql1, (Pon, Pstime, Petime, Plight, Pid))
+                self.connect.commit()
+                return "自定义成功"
+            else:
+                return "没有这个窗帘哦"
+
+
+    def mod_A(self, Pname, Rid, Pon, Pstime, Petime, Ptemperature, Pwet):
+        sql1 = "UPDATE AirConditioner SET Pon=%s, Pstime=%s, Petime=%s, Ptemperature=%s, Pwet=%s  WHERE Pid=%s;"
+        sql2 = "SELECT Pid FROM Product WHERE Pname=%s AND Rid=%s"
+        with self.cursor as cursor:
+            cursor.execute(sql2, (Pname, Rid))
+            data_origin = cursor.fetchall()
+            if data_origin and data_origin[0][0][0]=='A':
+                Pid = data_origin[0][0]
+                cursor.execute(sql1, (Pon, Pstime, Petime, Ptemperature, Pwet, Pid))
+                self.connect.commit()
+                return "自定义成功"
+            else:
+                return "没有这个空调哦"
+
+
+    def mod_L(self, Pname, Rid, Pon, Pstime, Petime, Plight, Pcolor):
+        sql1 = "UPDATE Light SET Pon=%s, Pstime=%s, Petime=%s, Plight=%s, Pcolor=%s  WHERE Pid=%s;"
+        sql2 = "SELECT Pid FROM Product WHERE Pname=%s AND Rid=%s"
+        with self.cursor as cursor:
+            cursor.execute(sql2, (Pname, Rid))
+            data_origin = cursor.fetchall()
+            if data_origin and data_origin[0][0][0]=='L':
+                Pid = data_origin[0][0]
+                cursor.execute(sql1, (Pon, Pstime, Petime, Plight, Pcolor, Pid))
+                self.connect.commit()
+                return "自定义成功"
+            else:
+                return "没有这个空电灯哦"

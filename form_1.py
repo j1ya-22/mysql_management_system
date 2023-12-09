@@ -219,9 +219,9 @@ def create_L():
     Petime = data['p_etime']
     Plight = data['p_light']
     Pcolor = data['p_color']
-    print(Pid,Tname,Rid,Pon,Pstime,Petime,Plight,Pcolor)
+
     massage=g.add_L(Pid,Tname,Rid,Pon,Pstime,Petime,Plight,Pcolor)
-    print(massage)
+
     if massage=="添加成功":
         return jsonify({'msg': massage, "redirectUrl": "/select_L"})
     else:
@@ -317,8 +317,110 @@ def delete_L():
 
 
 
+@app.route('/mod_T', methods=['GET', 'POST'])
+@login_required
+def mod_T():
+    return render_template('modify_television.html')
+
+
+@app.route('/modify_T', methods=['GET', 'POST'])
+@login_required
+def modify_T():
+    data = json.loads(request.data)
+    t = redgister_db()
+    Tname = data['p_name']
+    Rid = int(t.select_Rid(data['p_room']))
+    Pon = data['p_on']
+    Pstime = data['p_stime']
+    Petime = data['p_etime']
+    Plight = data['p_light']
+    Pvolume = data['p_volume']
+    r = redgister_db()
+    massage=r.mod_T(Tname, Rid, Pon, Pstime, Petime, Pvolume, Plight)
+    if massage=="自定义成功":
+        return jsonify({'msg': massage, "redirectUrl": "/select_T"})
+    else:
+        return jsonify({'msg': massage, "redirectUrl": "/mod_T"})
+
+
+@app.route('/mod_C', methods=['GET', 'POST'])
+@login_required
+def mod_C():
+    return render_template('modify_curtain.html')
+
+
+@app.route('/modify_C', methods=['GET', 'POST'])
+@login_required
+def modify_C():
+    data = json.loads(request.data)
+    t = redgister_db()
+    Tname = data['p_name']
+    Rid = int(t.select_Rid(data['p_room']))
+    Pon = data['p_on']
+    Pstime = data['p_stime']
+    Petime = data['p_etime']
+    Plight = data['p_light']
+    r = redgister_db()
+    massage=r.mod_C(Tname, Rid, Pon, Pstime, Petime, Plight)
+    if massage=="自定义成功":
+        return jsonify({'msg': massage, "redirectUrl": "/select_C"})
+    else:
+        return jsonify({'msg': massage, "redirectUrl": "/mod_C"})
+
+
+@app.route('/mod_A', methods=['GET', 'POST'])
+@login_required
+def mod_A():
+    return render_template('modify_airconditioner.html')
+
+
+@app.route('/modify_A', methods=['GET', 'POST'])
+@login_required
+def modify_A():
+    data = json.loads(request.data)
+    t = redgister_db()
+    Tname = data['p_name']
+    Rid = int(t.select_Rid(data['p_room']))
+    Pon = data['p_on']
+    Pstime = data['p_stime']
+    Petime = data['p_etime']
+    P_temperature = data['p_temperature']
+    P_wet = data['p_wet']
+    r = redgister_db()
+    massage=r.mod_A(Tname, Rid, Pon, Pstime, Petime, P_temperature, P_wet)
+    if massage=="自定义成功":
+        return jsonify({'msg': massage, "redirectUrl": "/select_A"})
+    else:
+        return jsonify({'msg': massage, "redirectUrl": "/mod_A"})
+
+
+@app.route('/mod_L', methods=['GET', 'POST'])
+@login_required
+def mod_L():
+    return render_template('modify_light.html')
+
+
+@app.route('/modify_L', methods=['GET', 'POST'])
+@login_required
+def modify_L():
+    data = json.loads(request.data)
+    t = redgister_db()
+    Tname = data['p_name']
+    Rid = int(t.select_Rid(data['p_room']))
+    Pon = data['p_on']
+    Pstime = data['p_stime']
+    Petime = data['p_etime']
+    P_light = data['p_light']
+    P_color = data['p_color']
+    r = redgister_db()
+    massage=r.mod_L(Tname, Rid, Pon, Pstime, Petime, P_light, P_color)
+    if massage=="自定义成功":
+        return jsonify({'msg': massage, "redirectUrl": "/select_L"})
+    else:
+        return jsonify({'msg': massage, "redirectUrl": "/mod_L"})
+
 
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
