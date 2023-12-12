@@ -83,6 +83,11 @@ def home_page():
         return render_template('header.html')
 
 
+@app.route('/help', methods=['GET', 'POST'])
+@login_required
+def help_page():
+        return render_template('help.html')
+
 @app.route('/select_T', methods=['GET', 'POST'])
 @login_required
 def select_T():
@@ -421,6 +426,35 @@ def modify_L():
 
 
 
+@app.route('/modefy', methods=['GET', 'POST'])
+@login_required
+def modify():
+    return render_template('modes.html')
+
+
+@app.route('/modes', methods=['GET', 'POST'])
+@login_required
+def modes():
+    data = json.loads(request.data)
+    t = redgister_db()
+    mode=data['mode']
+    if mode=="起床":
+        massage=t.getup()
+        return jsonify({'msg': massage})
+    if mode=="出门":
+        massage=t.leave_home()
+        return jsonify({'msg': massage})
+    if mode=="回家":
+        massage=t.home_back()
+        return jsonify({'msg': massage})
+    if mode=="深夜":
+        massage=t.night()
+        return jsonify({'msg': massage})
+
+
+
+
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',port=12345)

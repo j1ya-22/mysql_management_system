@@ -265,4 +265,54 @@ class redgister_db(object):
                 self.connect.commit()
                 return "自定义成功"
             else:
-                return "没有这个空电灯哦"
+                return "没有这个电灯哦"
+
+
+    def getup(self):
+        sql1='UPDATE Light SET Pon="on",Plight=50;;'
+        sql2='UPDATE Curtain SET Pon="on",Plight=50;'
+        with self.cursor as cursor:
+            cursor.execute(sql1)
+            cursor.execute(sql2)
+            self.connect.commit()
+            return "起床模式开启成功"
+
+
+    def leave_home(self):
+        sql1='UPDATE Curtain SET Pon="on",Plight=50;'
+        sql2='UPDATE Television SET Pon="off";'
+        sql3='UPDATE AirConditioner SET Pon="off";'
+        sql4='UPDATE Light SET Pon="off";'
+        with self.cursor as cursor:
+            cursor.execute(sql1)
+            cursor.execute(sql2)
+            cursor.execute(sql3)
+            cursor.execute(sql4)
+            self.connect.commit()
+            return "离家模式开启成功"
+
+
+    def home_back(self):
+        sql1='UPDATE Light SET Pon="on",Plight=70;'
+        sql2='UPDATE Curtain SET Plight=20 WHERE Pon="on";'
+        with self.cursor as cursor:
+            cursor.execute(sql1)
+            cursor.execute(sql2)
+            self.connect.commit()
+            return "回家模式开启成功"
+
+
+    def night(self):
+        sql1='UPDATE Curtain SET Pon="off";'
+        sql2='UPDATE Television SET Pon="off";'
+        sql3='UPDATE AirConditioner SET Pon="off";'
+        sql4='UPDATE Light SET Pcolor="yellow",Plight=20 WHERE Pon="on";'
+        with self.cursor as cursor:
+            cursor.execute(sql1)
+            cursor.execute(sql2)
+            cursor.execute(sql3)
+            cursor.execute(sql4)
+            self.connect.commit()
+            return "深夜模式开启成功"
+
+

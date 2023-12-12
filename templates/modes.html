@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/modes.css">
+    <title>模式选择</title>
+</head>
+<body>
+<a href="/header" class="back-button">返回</a>
+<div class="container">
+    <div class="button-container">
+        <button class="button" onclick="openMode('起床')">起床</button>
+        <button class="button" onclick="openMode('出门')">离家</button>
+        <br>
+        <button class="button" onclick="openMode('回家')">回家</button>
+        <button class="button" onclick="openMode('深夜')">深夜</button>
+    </div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <p id="modalMessage"></p>
+        <button class="modal-button" onclick="confirmMode()">确定</button>
+        <button class="modal-button" onclick="cancelMode()">取消</button>
+    </div>
+</div>
+
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <p class="success-message" id="successMessage"></p>
+        <button class="modal-button" onclick="closeSuccessModal()">确定</button>
+    </div>
+</div>
+
+<script>
+
+    var selectedMode;
+    function openMode(mode) {
+        selectedMode = mode;
+        var modalMessage = '确定开启该模式吗？';
+        document.getElementById('modalMessage').innerHTML = modalMessage;
+        document.getElementById('myModal').style.display = 'flex';
+    }
+
+    function confirmMode() {
+        document.getElementById('myModal').style.display = 'none';
+
+        document.getElementById('successMessage').innerHTML = successMessage;
+        document.getElementById('successModal').style.display = 'flex';
+
+        // 向后端发送JSON数据
+        var data = { mode: selectedMode };
+        fetch('/modes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+            .then(data => {
+                var successMessage = data.msg;
+                document.getElementById('successMessage').innerHTML = successMessage;
+                document.getElementById('successModal').style.display = 'flex';
+            }).catch(error => {
+                console.error('Registration error:', error);
+            });
+
+
+    }
+
+    function cancelMode() {
+        document.getElementById('myModal').style.display = 'none';
+    }
+
+    function closeSuccessModal() {
+        document.getElementById('successModal').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
