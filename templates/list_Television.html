@@ -4,9 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>家居信息</title>
-    <link rel="stylesheet" href="../static/header.css">
     <link rel="stylesheet" href="../static/list.css">
-
 </head>
 <body>
 <form method="post">
@@ -32,8 +30,8 @@
                         <td>{{ value[1] }}</td>
                         <td>{{ value[2] }}</td>
                         <td>{{ value[3] }}</td>
-                        <td>{{ value[4] }}</td>
-                        <td>{{ value[5] }}</td>
+                        <td>{{ value[4] if value[4] is not none else '——' }}</td>
+                        <td>{{ value[5] if value[5] is not none else '——' }}</td>
                         <td>{{ value[6] }}</td>
                         <td>{{ value[7] }}</td>
                     </tr>
@@ -43,13 +41,12 @@
             </div>
         </div>
     </div>
-
 </form>
-<div class="but">
+<div class="but-back">
     <a href="/header" class="btn-link">
-        <button class="btn">
+        <button class="btn-back">
             <!-- 按钮文本 -->
-            <span class="text">返回</span>
+            <span class="text">返&nbsp;回</span>
         </button>
     </a>
 </div>
@@ -57,7 +54,7 @@
     <a href="/add_T" class="btn-link">
         <button class="btn">
             <!-- 按钮文本 -->
-            <span class="text">添加电视</span>
+            <span class="text">添&nbsp;加&nbsp;电&nbsp;视</span>
         </button>
     </a>
 </div>
@@ -65,7 +62,7 @@
     <a href="/del_T" class="btn-link">
         <button class="btn">
             <!-- 按钮文本 -->
-            <span class="text">删除电视</span>
+            <span class="text">删&nbsp;除&nbsp;电&nbsp;视</span>
         </button>
     </a>
 </div>
@@ -73,10 +70,9 @@
     <a href="/mod_T" class="btn-link">
         <button class="btn">
             <!-- 按钮文本 -->
-            <span class="text">自定义</span>
+            <span class="text">&nbsp;&nbsp;自&nbsp;定&nbsp;义&nbsp;&nbsp;</span>
         </button>
     </a>
 </div>
 </body>
 </html>
-

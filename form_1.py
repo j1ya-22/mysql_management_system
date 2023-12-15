@@ -451,6 +451,16 @@ def modes():
         massage=t.night()
         return jsonify({'msg': massage})
 
+@app.route('/count', methods=['GET', 'POST'])
+@login_required
+def count():
+    r = redgister_db()
+    data_all = r.select_all()
+    return render_template('count_all.html', data_all=data_all)
+
+
+
+
 
 
 

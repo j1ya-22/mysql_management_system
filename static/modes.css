@@ -47,7 +47,10 @@ body::before {
             border: none;
             border-radius: 5px;
         }
-
+        .button .text {
+            font-size: 18px;
+            color: white;
+        }
         .modal {
             display: none;
             position: fixed;

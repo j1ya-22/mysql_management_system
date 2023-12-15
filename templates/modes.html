@@ -7,11 +7,11 @@
     <title>模式选择</title>
 </head>
 <body>
-<a href="/header" class="back-button">返回</a>
+<a href="/header" class="back-button">返&nbsp;回</a>
 <div class="container">
     <div class="button-container">
         <button class="button" onclick="openMode('起床')">起床</button>
-        <button class="button" onclick="openMode('出门')">离家</button>
+        <button class="button" onclick="openMode('出门')">出门</button>
         <br>
         <button class="button" onclick="openMode('回家')">回家</button>
         <button class="button" onclick="openMode('深夜')">深夜</button>
@@ -45,7 +45,7 @@
 
     function confirmMode() {
         document.getElementById('myModal').style.display = 'none';
-
+        var successMessage = '模式开启成功';
         document.getElementById('successMessage').innerHTML = successMessage;
         document.getElementById('successModal').style.display = 'flex';
 
@@ -58,15 +58,12 @@
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
-            .then(data => {
-                var successMessage = data.msg;
-                document.getElementById('successMessage').innerHTML = successMessage;
-                document.getElementById('successModal').style.display = 'flex';
-            }).catch(error => {
-                console.error('Registration error:', error);
-            });
-
+        .then(response => {
+            // 处理后端响应
+        })
+        .catch(error => {
+            // 处理错误
+        });
 
     }
 

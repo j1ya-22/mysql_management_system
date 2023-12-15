@@ -1,0 +1,61 @@
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>统计家具</title>
+    <link rel="stylesheet" href="../static/list.css">
+
+</head>
+<body>
+<form method="post">
+    <div id="backgroung">
+        <div id="dl">
+            <div class="text"><h1>统计家具</h1></div>
+            <div class="input-box">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>家具类型</th>
+                        <th>开启数量</th>
+                        <th>关闭数量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>电视</td>
+                        <td>{{ data_all[0][0] }}</td>
+                        <td>{{ data_all[1][0] }}</td>
+                    </tr>
+                    <tr>
+                        <td>窗帘</td>
+                        <td>{{ data_all[2][0]}}</td>
+                        <td>{{ data_all[3][0] }}</td>
+                    </tr>
+                    <tr>
+                        <td>空调</td>
+                        <td>{{ data_all[4][0] }}</td>
+                        <td>{{ data_all[5][0] }}</td>
+                    </tr>
+                    <tr>
+                        <td>电灯</td>
+                        <td>{{ data_all[6][0] }}</td>
+                        <td>{{ data_all[7][0] }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="but-back">
+    <a href="/header" class="btn-link">
+        <button class="btn-back">
+            <!-- 按钮文本 -->
+            <span class="text">返&nbsp;回</span>
+        </button>
+    </a>
+</div>
+</body>
+</html>

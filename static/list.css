@@ -1,103 +1,131 @@
- body {
-            margin: 0;
-            padding: 0;
-            border: 0;
-        }
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
 
-        #backgroung {
-            margin: 0;
-            padding: 0;
-            border: 0;
-            vertical-align: baseline;
-            height: 600px;
-            background-attachment: fixed;
-            background-size: cover;
-            background-image: url("../static/2.jpg");
-        }
+#backgroung {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+    height: 600px;
+    background-attachment: fixed;
+    background-size: cover;
+}
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('../static/img/backgroundlist.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* 添加模糊效果，可以根据需要调整模糊程度 */
+    opacity: 0.8; /* 透明度，可以调整透明度值 */
+}
+#dl {
+    width: 900px;
+    height: 600px;
+    background-image: linear-gradient(120deg, rgba(107, 182, 204, 0.7) 0%, rgba(206, 226, 223, 0.7) 100%); /* 使用 rgba 设置半透明背景 */
+    position: absolute;
+    top: 60px;
+    right: 300px;
+    margin: auto;
+    border-radius: 10%;
+    box-shadow: 10px 10px 1px rgba(97, 91, 100, 0.5);
+    overflow: auto;
+}
 
-        #dl {
-            width: 900px;
-            height: 600px;
-            background-image: linear-gradient(120deg, rgb(107, 182, 204) 0%, rgb(206, 226, 223) 100%);
-            position: absolute;
-            top: 60px;
-            right: 300px;
-            margin: auto;
-            border-radius: 10%;
-            box-shadow: 10px 10px 1px rgba(97, 91, 100, 0.5);
-            overflow: auto;
-        }
+.text {
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-style: inherit;
+}
 
-        .text {
-            color: white;
-            display: flex;
-            justify-content: center;
-            font-style: inherit;
-        }
+.input {
+    height: 10%;
+    width: 60%;
+}
+button {
+background-color: #4CAF50;
+color: white;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+.but-back {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    transform: scale(1);
+}
 
-        .input {
-            height: 10%;
-            width: 60%;
-        }
+.but-back .text {
+    font-size: 18px;
+    color: white;
+}
+.but-add {
+    position: fixed;
+    bottom: 94%;
+    right: 0%;
+    transform: scale(1);
+}
 
-        .but {
-            display: flex;
-            top: 10px;
-            right: 10px;
-        }
+.but-add .text {
+    font-size: 18px;
+    color: white;
+}
 
-        .but-add {
-             position: fixed;
-             bottom: 100%; /* 距离底部的距离，根据需要调整值 */
-             right: 6.5%;   /* 距离左侧的距离，根据需要调整值 */
-             transform: scale(1);  /* 将按钮水平居中并放大1.5倍 */
-        }
-        .but-add .text {
-            font-size: 18px; /* 根据需要调整字体大小 */
-            color: white;
-        }
+.but-delete {
+    position: fixed;
+    bottom: 88%;
+    right: 0%;
+    transform: scale(1);
+}
 
-        .but-delete {
-             position: fixed;
-             bottom: 90%; /* 距离底部的距离，根据需要调整值 */
-             right: 6.5%;    /* 使左侧距离页面左侧的一半 */
-             transform: scale(1);  /* 将按钮水平居中并放大1.5倍 */
-        }
-        .but-delete .text {
-            font-size: 18px; /* 根据需要调整字体大小 */
-            color: white;
-        }
+.but-delete .text {
+    font-size: 18px;
+    color: white;
+}
 
-        .but-modify {
-             position: fixed;
-             bottom: 80%; /* 距离底部的距离，根据需要调整值 */
-             right: 6.5%;   /* 距离左侧的距离，根据需要调整值 */
-             transform: scale(1);
-        }
-        .but-modify .text {
-            font-size: 18px; /* 根据需要调整字体大小 */
-            color: white;
-        }
-        .input-box {
-            width: 900px;
-            white-space: nowrap; /* 防止换行 */
-            text-align: center; /* 让表格内容在水平方向上居中 */
-        }
+.but-modify {
+    position: fixed;
+    bottom: 82%;
+    right: 0%;
+    transform: scale(1);
+}
 
-        table {
-            width: 100%;
-            white-space: nowrap; /* 防止换行 */
-            border-collapse: collapse;
-            margin-top: 20px; /* 调整表格与上方内容的距离 */
-        }
+.but-modify .text {
+    font-size: 18px;
+    color: white;
+}
 
-        th, td {
-            border: 1px solid white;
-            padding: 10px;
-            color: white;
-            text-align: center; /* 居中对齐 */
-        }
+.input-box {
+    width: 900px;
+    white-space: nowrap;
+    text-align: center;
+}
 
-        th {
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+table {
+    width: 100%;
+    white-space: nowrap;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid white;
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+th {
+    background-color: rgba(0, 0, 0, 0.5);
+}

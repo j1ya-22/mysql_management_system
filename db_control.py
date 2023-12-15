@@ -315,4 +315,39 @@ class redgister_db(object):
             self.connect.commit()
             return "深夜模式开启成功"
 
-
+    def select_all(self):
+        sql1 = "SELECT COUNT(*) FROM Television WHERE Pon='on'"
+        sql2 = "SELECT COUNT(*) FROM Television WHERE Pon='off'"
+        sql3 = "SELECT COUNT(*) FROM Curtain WHERE Pon='on'"
+        sql4 = "SELECT COUNT(*) FROM Curtain WHERE Pon='off'"
+        sql5 = "SELECT COUNT(*) FROM AirConditioner WHERE Pon='on'"
+        sql6 = "SELECT COUNT(*) FROM AirConditioner WHERE Pon='off'"
+        sql7 = "SELECT COUNT(*) FROM Light WHERE Pon='on'"
+        sql8 = "SELECT COUNT(*) FROM Light WHERE Pon='off'"
+        list= []
+        with self.cursor as cursor:
+            cursor.execute(sql1)
+            data_origin1 = cursor.fetchall()
+            cursor.execute(sql2)
+            data_origin2 = cursor.fetchall()
+            cursor.execute(sql3)
+            data_origin3 = cursor.fetchall()
+            cursor.execute(sql4)
+            data_origin4 = cursor.fetchall()
+            cursor.execute(sql5)
+            data_origin5 = cursor.fetchall()
+            cursor.execute(sql6)
+            data_origin6 = cursor.fetchall()
+            cursor.execute(sql7)
+            data_origin7 = cursor.fetchall()
+            cursor.execute(sql8)
+            data_origin8 = cursor.fetchall()
+            list.append(data_origin1[0])
+            list.append(data_origin2[0])
+            list.append(data_origin3[0])
+            list.append(data_origin4[0])
+            list.append(data_origin5[0])
+            list.append(data_origin6[0])
+            list.append(data_origin7[0])
+            list.append(data_origin8[0])
+            return list
