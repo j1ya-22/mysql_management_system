@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/modify.css">
+    <title>自定义电视数据</title>
+</head>
+<body>
+<form method="post" id="form">
+    <div id="background">
+        <div id="dl">
+            <div class="text">电视修改</div>
+            <br>
+            <div class="input-container">
+                <div class="text">电视名称：</div>
+                <input class="input" placeholder="长度不超过10" type="text" id="p_name"></input>
+            </div>
+            <br>
+            <div class="input-container">
+                <div class="text">房间名称：</div>
+                <select class="input" id="p_room" style="width: 275px;">
+                    <option value="主卧">主卧</option>
+                    <option value="副卧">副卧</option>
+                    <option value="客卧">客卧</option>
+                    <option value="客厅">客厅</option>
+                    <option value="书房">书房</option>
+                </select>
+            </div>
+            <br>
+              <div class="input-container">
+                    <div class="text">开关状态：</div>
+                    <select class="input" type="text" id="p_on" style="width: 275px;">
+                        <option value="off">off</option>
+                        <option value="on">on</option>
+                    </select>
+                </div>
+            <br>
+            <div class="input-container">
+                <div class="text">开启时间：</div>
+                <input class="input" placeholder="格式为小时:分钟,各两位数字" type="text" id="p_stime"></input>
+            </div>
+            <br>
+            <div class="input-container">
+                <div class="text">关闭时间：</div>
+                <input class="input" placeholder="格式为小时:分钟,各两位数字" type="text" id="p_etime"></input>
+            </div>
+            <br>
+            <div class="input-container">
+                    <div class="text">电视音量：</div>
+                    <input class="input" placeholder="范围为0到100，默认20" type="number" id="p_volume" max="100" min="0"></input>
+                </div>
+                <br>
+                <div class="input-container">
+                    <div class="text">电视亮度：</div>
+                    <input class="input" placeholder="范围为0到100，默认20" type="number" id="p_light" max="100" min="0"></input>
+                </div>
+            <br>
+            <div class="but">
+                <button type="submit">提&nbsp;交</button>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="popup-box" id="loginSuccessPopup">
+    <div class="popup-title">家居管理系统</div>
+    <div class="popup-content" id="popupContent">
+        <!-- 动态内容将在这里显示 -->
+    </div>
+    <button class="popup-close-button" onclick="closePopup()">确定</button>
+</div>
+<script>
+        function showPopup(message) {
+            document.getElementById('popupContent').textContent = message;
+            document.getElementById('loginSuccessPopup').style.display = 'block';
+        }
+        function closePopup() {
+            document.getElementById('loginSuccessPopup').style.display = 'none';
+            if(sessionStorage.getItem('redirectUrl')!==null){
+
+                window.location.href = sessionStorage.getItem('redirectUrl');
+            }
+        }
+        // 获取表单元素和按钮元素
+        const form = document.getElementById("form");
+        const btn = document.querySelector("button[type=submit]");
+
+        // 添加点击事件监听器
+        btn.addEventListener("click", function(event) {
+            // 阻止表单默认提交行为
+            event.preventDefault();
+
+            // 获取输入框的值
+            const p_name = document.getElementById("p_name").value.trim();
+            const p_room = document.getElementById("p_room").value.trim();
+            var p_on = document.getElementById("p_on").value.trim();
+            var p_stime = document.getElementById("p_stime").value.trim();
+            var p_etime = document.getElementById("p_etime").value.trim();
+            var p_volume = document.getElementById("p_volume").value.trim();
+            var p_light = document.getElementById("p_light").value.trim();
+            //没有家具或者房间则后端返回
+            if (p_name === "" || p_name.length > 10) {
+                sessionStorage.setItem('redirectUrl', "/mod_T");
+                showPopup("电视名称不正确");
+                return;
+            }
+
+
+            if (p_stime === ""){
+                p_stime=null;
+            }
+            //时间按格式输入
+            else if (!/^(([01][0-9])|(2[0-4])):[0-5][0-9]$/.test(p_stime)) {
+                sessionStorage.setItem('redirectUrl', "/mod_T");
+                showPopup("开启时间格式不正确");
+                return;
+            }
+
+            if (p_etime === ""){
+                p_etime=null;
+            }
+
+            else if (!/^(([01][0-9])|(2[0-4])):[0-5][0-9]$/.test(p_etime)) {
+                sessionStorage.setItem('redirectUrl', "/mod_T");
+                showPopup("关闭时间格式不正确");
+                return;
+            }
+
+            if (p_volume === ""){
+                p_volume=20;
+            }
+
+            if ( p_volume < 0 || p_volume > 100) {
+                sessionStorage.setItem('redirectUrl', "/mod_T");
+                showPopup("电视音量不正确");
+                return;
+            }
+
+            if(p_light===""){
+                p_light=20;
+            }
+
+            if (p_light < 0 || p_light > 100) {
+                sessionStorage.setItem('redirectUrl', "/mod_T");
+                showPopup("电视亮度不正确");
+                return;
+            }
+            var formData = {
+                p_name: p_name,
+                p_room: p_room,
+                p_on: p_on,
+                p_stime: p_stime,
+                p_etime: p_etime,
+                p_volume: p_volume,
+                p_light: p_light
+            };
+            var formDataJSON = JSON.stringify(formData);
+            console.log(formDataJSON);
+            fetch('/modify_T', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: formDataJSON
+            })
+            .then(response => response.json())
+            .then(data => {
+                showPopup(data.msg);
+                sessionStorage.setItem('redirectUrl', data.redirectUrl);
+            }).catch(error => {
+                console.error('Registration error:', error);
+            });
+            // 提交表单
+            // form.action = "success.html";
+            // form.submit();
+        });
+
+</script>
+<div class="but1">
+    <a href="/select_T" class="btn-link">
+        <button class="btn">
+            <!-- 按钮文本 -->
+            <span class="text">返&nbsp;回</span>
+        </button>
+    </a>
+</div>
+</body>
+</html>

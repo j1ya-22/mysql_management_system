@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>智能家居管理系统</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <link rel="stylesheet" href="../static/header.css">
+</head>
+<body>
+<div id="background">
+    <!-- 登出按钮 -->
+    <div class="but1">
+    <a href="/" class="btn-link">
+        <button class="btn">
+            <!-- 按钮文本 -->
+            <span class="text">&nbsp;&nbsp;&nbsp;&nbsp;返&nbsp;回&nbsp;&nbsp;&nbsp;</span>
+        </button>
+    </a>
+</div>
+     <div class="but2">
+    <a href="/help" class="btn2-link">
+        <button class="btn2">
+            <!-- 按钮文本 -->
+            <span class="text">用户&nbsp;手册</span>
+        </button>
+    </a>
+</div>
+    <!-- 6个按钮 -->
+    <div class="input">
+        <button class="value" onclick="redirectTo('/count')">
+            查询所有家居状态
+        </button>
+        <button class="value" onclick="redirectTo('/select_T')">
+            查询电视状态
+        </button>
+        <button class="value" onclick="redirectTo('/select_C')">
+            查询窗帘状态
+        </button>
+        <button class="value" onclick="redirectTo('/modefy')">
+            模式选择
+        </button>
+        <button class="value" onclick="redirectTo('/select_L')">
+            查询电灯状态
+        </button>
+        <button class="value" onclick="redirectTo('/select_A')">
+            查询空调状态
+        </button>
+    </div>
+    <script>
+    function redirectTo(url) {
+        window.location.href = url;
+    }
+    </script>
+</div>
+</body>
+</html>

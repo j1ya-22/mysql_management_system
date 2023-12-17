@@ -1,0 +1,141 @@
+ body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+body::before{
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-image: url('../static/img/backgroundlist.png');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px); /* 添加模糊效果，可以根据需要调整模糊程度 */
+    opacity: 0.8; /* 透明度，可以调整透明度值 */
+}
+        .card__content {
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .card {
+            width: 570px;
+            height: 762px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.8); /* 使用 rgba 设置半透明背景 */
+            border-radius: 8px;
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            margin-top: 0;
+        }
+
+        p {
+            margin: 0;
+            padding-left: 0;
+            text-indent: 4em;
+            position: relative;
+            margin-right: 2em;
+        }
+
+        p::first-line {
+            text-indent: 4em; /* 调整第一行的缩进 */
+        }
+
+        .additional-text {
+            margin-left: 2em; /* 控制额外内容的左边距，即从边框左侧第二个字开始 */
+        }
+
+        .tools {
+            display: flex;
+            align-items: center;
+            padding: 9px;
+        }
+
+        .circle {
+            padding: 0 4px;
+        }
+
+        .box {
+            display: inline-block;
+            align-items: center;
+            width: 10px;
+            height: 10px;
+            padding: 1px;
+            border-radius: 50%;
+        }
+
+        .red {
+            background-color: #ff605c;
+        }
+
+        .yellow {
+            background-color: #ffbd44;
+        }
+
+        .green {
+            background-color: #00ca4e;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .but {
+            display: flex;
+            justify-content: center;
+        }
+
+        .but1 {
+            width: 150px;
+            height: 40px;
+            min-width: 150px;
+            min-height: 40px;
+            position: fixed;
+            z-index: 1000;
+        }
+
+        .but1 {
+            top: 10px;
+            left: 10px;
+        }
+
+        .but1 .text {
+            font-size: 18px;
+            color: white;
+        }

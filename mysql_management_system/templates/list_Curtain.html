@@ -1,0 +1,78 @@
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>家居信息</title>
+    <link rel="stylesheet" href="../static/list.css">
+
+</head>
+<body>
+<form method="post">
+    <div id="backgroung">
+        <div id="dl">
+            <div class="text"><h1>家居-窗帘信息</h1></div>
+            <div class="input-box">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>窗帘名称</th>
+                        <th>房间名</th>
+                        <th>窗帘开关状态</th>
+                        <th>设定的开启时间</th>
+                        <th>设定的关闭时间</th>
+                        <th>设定的亮度</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for value in data_all %}
+                    <tr>
+                        <td>{{ value[1] }}</td>
+                        <td>{{ value[2] }}</td>
+                        <td>{{ value[3] }}</td>
+                        <td>{{ value[4] if value[4] is not none else '——' }}</td>
+                        <td>{{ value[5] if value[5] is not none else '——' }}</td>
+                        <td>{{ value[6] }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</form>
+<div class="but-back">
+    <a href="/header" class="btn-link">
+        <button class="btn-back">
+            <!-- 按钮文本 -->
+            <span class="text">返&nbsp;回</span>
+        </button>
+    </a>
+</div>
+<div class="but-add">
+    <a href="/add_C" class="btn-link">
+        <button class="btn">
+            <!-- 按钮文本 -->
+            <span class="text">添&nbsp;加&nbsp;窗&nbsp;帘</span>
+        </button>
+    </a>
+</div>
+<div class="but-delete">
+    <a href="/del_C" class="btn-link">
+        <button class="btn">
+            <!-- 按钮文本 -->
+            <span class="text">删&nbsp;除&nbsp;窗&nbsp;帘</span>
+        </button>
+    </a>
+</div>
+<div class="but-modify  ">
+    <a href="/mod_C" class="btn-link">
+        <button class="btn">
+            <!-- 按钮文本 -->
+            <span class="text">&nbsp;&nbsp;自&nbsp;定&nbsp;义&nbsp;&nbsp;</span>
+        </button>
+    </a>
+</div>
+</body>
+</html>
