@@ -269,8 +269,8 @@ class redgister_db(object):
 
 
     def getup(self):
-        sql1='UPDATE Light SET Pon="on",Plight=50;;'
-        sql2='UPDATE Curtain SET Pon="on",Plight=50;'
+        sql1='UPDATE Light SET Pstime="7:00",Petime="8:00",Plight=50;'
+        sql2='UPDATE Curtain SET Pstime="7:00",Petime="18:00",Plight=100;'
         with self.cursor as cursor:
             cursor.execute(sql1)
             cursor.execute(sql2)
@@ -279,21 +279,19 @@ class redgister_db(object):
 
 
     def leave_home(self):
-        sql1='UPDATE Curtain SET Pon="on",Plight=50;'
-        sql2='UPDATE Television SET Pon="off";'
-        sql3='UPDATE AirConditioner SET Pon="off";'
-        sql4='UPDATE Light SET Pon="off";'
+        sql1='UPDATE Television SET Petime = CURTIME();'
+        sql2='UPDATE AirConditioner SET Petime = CURTIME();'
+        sql3='UPDATE Light SET Petime = CURTIME();'
         with self.cursor as cursor:
             cursor.execute(sql1)
             cursor.execute(sql2)
             cursor.execute(sql3)
-            cursor.execute(sql4)
             self.connect.commit()
             return "离家模式开启成功"
 
 
     def home_back(self):
-        sql1='UPDATE Light SET Pon="on",Plight=70;'
+        sql1='UPDATE Light SET Pon=CURTIME(),Plight=70,Petime=null;'
         sql2='UPDATE Curtain SET Plight=20 WHERE Pon="on";'
         with self.cursor as cursor:
             cursor.execute(sql1)
@@ -303,9 +301,9 @@ class redgister_db(object):
 
 
     def night(self):
-        sql1='UPDATE Curtain SET Pon="off";'
-        sql2='UPDATE Television SET Pon="off";'
-        sql3='UPDATE AirConditioner SET Pon="off";'
+        sql1='UPDATE Curtain SET Petime=CURTIME();'
+        sql2='UPDATE Television SET Petime=CURTIME();'
+        sql3='UPDATE AirConditioner SET Petime=CURTIME();'
         sql4='UPDATE Light SET Pcolor="yellow",Plight=20 WHERE Pon="on";'
         with self.cursor as cursor:
             cursor.execute(sql1)
